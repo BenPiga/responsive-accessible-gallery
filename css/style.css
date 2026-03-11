@@ -1,0 +1,88 @@
+/* MOBILE VIEW (starting layout - mobile first) */
+html {
+  scroll-behavior: smooth; /* smooth scrolling for navigation (might remove later if needed) */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px; /* just adding some space around the page */
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block; /* makes sure images behave nicely inside the layout */
+}
+
+/* Grid setup for mobile: single column with a little spacing */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px; 
+}
+
+/* Basic figure styling (these will change a bit in dark mode later) */
+figure {
+  margin: 0;
+  padding: 10px;
+  background-color: #f4f4f4; /* light background for the cards */
+  color: #333333; /* darker text so it's readable */
+  border: 2px solid #cccccc; /* simple border */
+  text-align: center;
+}
+
+/* TABLET VIEW (applies when screen > 772px) */
+@media screen and (min-width: 772px) {
+  /* switch grid to two columns for tablet screens */
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  /* make figures circular for this layout */
+  figure {
+    border-radius: 50%;
+    overflow: hidden; /* keeps image inside the circle */
+  }
+
+  /* last figure stretches across both columns */
+  figure:last-child {
+    grid-column: 1 / -1; 
+  }
+}
+
+/* LARGE SCREEN VIEW (applies when ≥ 992px) */
+@media screen and (min-width: 992px) {
+  /* remove the circle style on bigger screens */
+  figure {
+    border-radius: 0;
+  }
+
+  /* every third figure spans across both columns */
+  figure:nth-child(3n) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ACCESSIBILITY: Reduced Motion Setting */
+@media (prefers-reduced-motion: reduce) {
+  /* disable smooth scrolling if the user prefers less motion */
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ACCESSIBILITY: Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  /* adjust colors so figures look better in dark mode */
+  figure {
+    background-color: #222222; /* darker background */
+    color: #ffeb3b; /* yellow-ish text for contrast */
+    border: 2px solid #000000; /* darker border */
+  }
+  
+  /* dark background for the whole page */
+  body {
+    background-color: #121212;
+    color: #ffffff;
+  }
+}
